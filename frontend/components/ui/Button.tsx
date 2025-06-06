@@ -1,20 +1,14 @@
 import React from "react";
 import clsx from "clsx";
-import "@/styles/components/button.scss"; // استایل‌های اختصاصی دکمه
+import "../../styles/components/button.scss";
 
-// تعریف پراپ‌های کامپوننت
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: "primary" | "secondary";
 }
 
 const Button = ({ children, className, variant = "primary", ...props }: ButtonProps) => {
-  // با clsx کلاس‌های مختلف را به صورت هوشمند ترکیب می‌کنیم
-  const buttonClasses = clsx(
-    "btn", // کلاس پایه
-    `btn--${variant}`, // کلاس بر اساس نوع دکمه
-    className // کلاس‌های دلخواهی که از بیرون پاس داده می‌شود
-  );
+  const buttonClasses = clsx("btn", `btn--${variant}`, className);
 
   return (
     <button className={buttonClasses} {...props}>

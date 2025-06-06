@@ -1,29 +1,35 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import "../../../styles/pages/auth.scss";
-import { loginUser } from "../../../lib/auth.service";
+import { registerUser } from "../../../lib/auth.service";
 import Input from "../../../components/ui/Input";
 import Button from "../../../components/ui/Button";
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = async (event: React.FormEvent) => {
+  const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await loginUser({ email, password });
-      console.log("Login successful!", response);
-      // در قسمت بعدی، توکن را ذخیره کرده و کاربر را به داشبورد هدایت می‌کنیم
-      alert("Login successful! Token: " + response.token);
+      const response = await registerUser({ email, password });
+      console.log("Registration successful!", response);
+
+      // بهترین تجربه کاربری این است که بعد از ثبت‌نام موفق، کاربر را به صفحه ورود هدایت کنیم
+      alert("Registration successful! You will now be redirected to the login page.");
+      router.push("/auth/login");
     } catch (err: any) {
-      const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
+      const errorMessage =
+        err.response?.data?.message ||
+        "An unexpected error occurred during registration.";
       setError(errorMessage);
       console.error(err);
     } finally {
@@ -33,9 +39,9 @@ export default function LoginPage() {
 
   return (
     <div className="auth-container">
-      <h1>Login</h1>
-      <p>Welcome back! Please enter your details.</p>
-      <form onSubmit={handleLogin} className="auth-form">
+      <h1>Create an Account</h1>
+      <p>Start your journey with us today.</p>
+      <form onSubmit={handleRegister} className="auth-form">
         <Input
           id="email"
           label="Email"
@@ -52,13 +58,13 @@ export default function LoginPage() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
+          placeholder="Create a password"
           required
           disabled={isLoading}
         />
         {error && <p className="error-message">{error}</p>}
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Logging in..." : "Login"}
+          {isLoading ? "Creating Account..." : "Create Account"}
         </Button>
       </form>
     </div>
