@@ -20,8 +20,8 @@ export default function LoginPage() {
     try {
       const response = await loginUser({ email, password });
       console.log("Login successful!", response);
-      // در قسمت بعدی، توکن را ذخیره کرده و کاربر را به داشبورد هدایت می‌کنیم
-      alert("Login successful! Token: " + response.token);
+      alert("Login successful! Redirecting to dashboard...");
+      // router.push('/dashboard'); // این خط را فعلاً کامنت نگه می‌داریم تا در ماژول بعد صفحه داشبورد را بسازیم
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
       setError(errorMessage);
