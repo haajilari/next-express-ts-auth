@@ -49,20 +49,20 @@ export const loginUserHandler = async (req: Request, res: Response) => {
       user.passwordHash
     );
     if (isPasswordCorrect) {
-      const userResponse = {
-        id: user.id,
-        email: user.email,
-      };
-
-      const payload: { userId: number; email: string } = {
-        userId: user.id,
-        email: user.email,
-      };
+      const payload = { userId: user.id, email: user.email };
       const token = generateToken(payload);
+
+      res.cookie("auth_token", token, {
+        httpOnly: true, 
+        secure: process.env.NODE_ENV === "production", 
+        maxAge: 60 * 60 * 1000, 
+        path: "/",
+        sameSite: "lax", 
+      });
+
       res.status(200).json({
         message: "Login successful!",
-        token: token,
-        user: userResponse,
+        user: { id: user.id, email: user.email },
       });
       return;
     }
