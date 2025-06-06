@@ -1,0 +1,29 @@
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    color: #666;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// یک کلاس کمکی برای عرض کامل
+.w-full {
+  width: 100%;
+}

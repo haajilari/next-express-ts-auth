@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "target": "ES2020" /* نسخه جاوااسکریپت نهایی را مشخص می‌کند */,
+    "module": "CommonJS" /* سیستم ماژول‌بندی */,
+    "rootDir": "./src" /* مشخص می‌کند که فایل‌های سورس در کجا قرار دارند */,
+    "outDir": "./build" /* مشخص می‌کند که فایل‌های کامپایل‌شده کجا ذخیره شوند */,
+    "esModuleInterop": true /* برای سازگاری بهتر با ماژول‌های CommonJS */,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true /* تمام قوانین سخت‌گیرانه تایپ‌اسکریپت را فعال می‌کند */,
+    "skipLibCheck": true
+  }
+}

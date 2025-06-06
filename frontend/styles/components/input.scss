@@ -1,0 +1,27 @@
+.input-wrapper {
+  width: 100%;
+  margin-bottom: 16px;
+
+  .input-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box; // برای محاسبه صحیح width
+
+    &:focus {
+      outline: none;
+      border-color: #0070f3;
+      box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+    }
+  }
+}
