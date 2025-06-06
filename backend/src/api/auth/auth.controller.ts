@@ -49,20 +49,24 @@ export const loginUserHandler = async (req: Request, res: Response) => {
       user.passwordHash
     );
     if (isPasswordCorrect) {
-      const userResponse = {
-        id: user.id,
-        email: user.email,
-      };
-
-      const payload: { userId: number; email: string } = {
-        userId: user.id,
-        email: user.email,
-      };
+      const payload = { userId: user.id, email: user.email };
       const token = generateToken(payload);
+
+      console.log({ tokenBack: token });
+
+      // ✅ تنظیم کوکی در پاسخ
+      res.cookie("auth_token", token, {
+        httpOnly: true, // جلوگیری از دسترسی جاوااسکریپت
+        secure: process.env.NODE_ENV === "production", // فقط در https ارسال شود
+        maxAge: 60 * 60 * 1000, // انقضا بعد از ۱ ساعت (به میلی‌ثانیه)
+        path: "/", // کوکی برای تمام مسیرهای سایت در دسترس باشد
+        sameSite: "lax", // برای امنیت بیشتر در برابر حملات CSRF
+      });
+
+      // ✅ توکن دیگر در بدنه پاسخ ارسال نمی‌شود
       res.status(200).json({
         message: "Login successful!",
-        token: token,
-        user: userResponse,
+        user: { id: user.id, email: user.email },
       });
       return;
     }
