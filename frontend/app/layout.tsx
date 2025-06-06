@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 // فایل CSS قبلی را حذف یا کامنت کرده و فایل Sass را اضافه کنید
 // import './globals.css';
-import "@/styles/main.scss";
+import "../styles/main.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 
